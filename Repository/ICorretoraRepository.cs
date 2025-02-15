@@ -10,11 +10,11 @@ namespace App_Corretora.Repository
     public interface ICorretoraRepository
     {
         Task<List<Corretora>> listarCorretoras();
-        Task<int> localizarCorretora(int cnpj);
-        Task<int> apagarCorretora(int cnpj);
+        Task<string> localizarCorretora(string cnpj);
+        Task<string> apagarCorretora(string cnpj);
         Task<int> cadastrarCorretora(Corretora corretores);
 
-        Task<int> atualizarCorretora(Corretora corretores);
+        Task<string> atualizarCorretora(Corretora corretores);
 
 
 

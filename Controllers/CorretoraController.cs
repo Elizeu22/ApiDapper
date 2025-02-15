@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace App_Corretora.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("corretores/")]
     [ApiController]
     public class CorretoraController:ControllerBase
     {
@@ -21,7 +21,7 @@ namespace App_Corretora.Controllers
 
 
         [HttpGet]
-        [Route("Corretoras")]
+        [Route("Localizar")]
         public async Task<IActionResult> localizarCorretora()
         {
             var corretoras = await _repository.listarCorretoras();
@@ -29,8 +29,8 @@ namespace App_Corretora.Controllers
         }
 
         [HttpGet]
-        [Route("Corretora")]
-        public async Task<IActionResult> localizarCorretora(int cnpj)
+        [Route("Pesquisar")]
+        public async Task<IActionResult> localizarCorretora(string cnpj)
         {
             var corretora = await _repository.localizarCorretora(cnpj);
             return Ok(corretora);
@@ -38,7 +38,7 @@ namespace App_Corretora.Controllers
 
 
         [HttpPost]
-        [Route("Corretoras")]
+        [Route("Gravar")]
         public async Task<IActionResult> cadastrarCorretora(Corretora novaCorretora)
         {
             var corretora = await _repository.cadastrarCorretora(novaCorretora);
@@ -46,7 +46,7 @@ namespace App_Corretora.Controllers
         }
 
         [HttpPut]
-        [Route("Corretoras")]
+        [Route("Atualizar")]
         public async Task<IActionResult> atualizarCorretora(Corretora novaCorretora)
         {
             var corretora = await _repository.atualizarCorretora(novaCorretora);
@@ -55,8 +55,8 @@ namespace App_Corretora.Controllers
 
 
         [HttpDelete]
-        [Route("Corretoras")]
-        public async Task<IActionResult> apagarCorretora(int cnpj)
+        [Route("Deletar")]
+        public async Task<IActionResult> apagarCorretora(string cnpj)
         {
             var corretora = await _repository.apagarCorretora(cnpj);
             return Ok(corretora);

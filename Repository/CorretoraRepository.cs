@@ -30,13 +30,13 @@ namespace App_Corretora.Repository
 
 
 
-        public async Task<int> localizarCorretora(int cnpj)
+        public async Task<string> localizarCorretora(string cnpj)
         {
             using (var conn = _sessaoDB.Connection)
             {
-                string consulta = "Select from Corretores where cnpj = @idCnpj";
+                string consulta = "Select *from Corretores where cnpj = @cnpj";
                 var corretora =  await conn.ExecuteAsync(sql: consulta, param: new { cnpj });
-                return corretora;
+                return corretora.ToString();
             }
         }
 
@@ -55,25 +55,25 @@ namespace App_Corretora.Repository
 
 
 
-        public async Task<int> atualizarCorretora(Corretora novaCorretora)
+        public async Task<string> atualizarCorretora(Corretora novaCorretora)
         {
 
             using (var conn = _sessaoDB.Connection)
             {
                 string atualizaCorretoa = @"Update Corretores set corretora=@corretora,logradouro=@logradouro,cep=@cep,nomeSocial=@nomeSocial where = cnpj=@cnpj";
                 var corretoras = await conn.ExecuteAsync(sql: atualizaCorretoa, param: novaCorretora);
-                return corretoras;
+                return corretoras.ToString();
             }
 
         }
 
-        public async Task<int> apagarCorretora(int idCnpj)
+        public async Task<string> apagarCorretora(string idCnpj)
         {
             using (var conn = _sessaoDB.Connection)
             {
                 string consulta = @"Delete from Corretores where cnpj = @idCnpj";
                 var corretoras = await conn.ExecuteAsync(sql: consulta, param: new { idCnpj });
-                return corretoras;
+                return corretoras.ToString();
             }
         }
 

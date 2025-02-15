@@ -5,9 +5,9 @@ namespace App_Corretora.Models
     public class Corretora
     {
        
-        public int Cnpj { get; set; }
+        public string Cnpj { get; set; }
 
-        public string CorretoraApp {  get; set; }
+        public string corretora {  get; set; }
 
         public string Logradouro { get; set; }
 
