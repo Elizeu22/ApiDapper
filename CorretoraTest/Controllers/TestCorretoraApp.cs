@@ -10,31 +10,60 @@ using App_Corretora.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using FluentAssertions;
 using Xunit;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
+using Microsoft.AspNetCore.Mvc.Testing;
+using System.Net;
+using Microsoft.AspNetCore.Hosting;
+
+
 
 namespace CorretoraTest.Controllers
 {
     public class TestCorretoraApp
     {
-        private readonly CorretoraRepository _repository;
-         
-        public TestCorretoraApp(CorretoraRepository repository)
+
+ 
+        [Fact]
+        public async Task Ler()
         {
-            _repository = repository;
+            await using var factory = new WebApplicationFactory<Program>();
+            var client = factory.CreateClient();
+
+            // Act
+            var response = await client.GetAsync("corretores/Localizar");
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+
+
         }
+
+
 
         [Fact]
-        public async Task listarCorretoras()
-        {
-            //arrange
-            var corretoras =  await _repository.listarCorretoras();
+        public async Task LerCNpj()
+        { 
 
-           
+            string cnpj = "66456464";
+        
+            await using var factory = new WebApplicationFactory<Program>();
+            var client = factory.CreateClient();
 
-            ///Assert 
-           corretoras.Should().Equals(corretoras);
+            // Act
+            var response = await client.GetAsync($"corretores/Pesquisar?cnpj={cnpj}");
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+
 
         }
 
-     
+
+
     }
 }
