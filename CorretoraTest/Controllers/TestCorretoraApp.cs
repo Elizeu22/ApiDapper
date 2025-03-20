@@ -47,13 +47,36 @@ namespace CorretoraTest.Controllers
         public async Task LerCNpj()
         { 
 
-            string cnpj = "66456464";
+            string cnpj = "4232242";
         
             await using var factory = new WebApplicationFactory<Program>();
             var client = factory.CreateClient();
 
             // Act
             var response = await client.GetAsync($"corretores/Pesquisar?cnpj={cnpj}");
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+
+
+        }
+
+
+
+
+        [Fact]
+        public async Task DeletarCNpj()
+        {
+
+            string cnpj = "65895888";
+
+            await using var factory = new WebApplicationFactory<Program>();
+            var client = factory.CreateClient();
+
+            // Act
+            var response = await client.DeleteAsync($"corretores/Deletar?cnpj={cnpj}");
 
             // Assert
             response.EnsureSuccessStatusCode();
